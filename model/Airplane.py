@@ -1,8 +1,7 @@
 
 class Airplane(object):
     
-    def __init__(self, name: str, n_seatings: int, state: bool):
+    def __init__(self, name: str, n_seat: int):
         
         self.name: str = name
-        self.n_seating:int = n_seatings
-        self.state: bool = state
+        self.n_seat:int = n_seat
