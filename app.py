@@ -7,6 +7,7 @@ from model.Route import Route
 from model.SaleTicket import SaleTicket
 from model.SaleTicketDetail import SaleTicketDetail
 
+
 def create_list_route() -> List[Route]:
 
     data_routes: List[Dict[str, str | float | int]] = [
@@ -116,26 +117,35 @@ def create_list_airplane() -> List[Airplane]:
     data_plane: List[Dict[str, str | int]] = [
         {
             "name": "A001",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "06:30 AM",
+            "comeback": "15:45 PM"
         },
         {
             "name": "A002",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "07:25 AM",
+            "comeback": "16:25 PM"
         },
         {
             "name": "A003",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "08:10 AM",
+            "comeback": "17:15 PM"
         },
         {
             "name": "A004",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "08:50 AM",
+            "comeback": "17:50 PM"
         }
     ]
 
     airplanes: List[Airplane] = []
 
     for key, airplane in enumerate(data_plane):
-        obj_airplane = Airplane(str(airplane['name']), int(airplane['n_seat']))
+        obj_airplane = Airplane(str(airplane['name']), int(airplane['n_seat']),
+                                str(airplane['going']), str(airplane['comeback']))
         airplanes.append(obj_airplane)
     return airplanes
 
@@ -148,5 +158,7 @@ def create_sales_ticket(route: Route, airplanes: List[Airplane]) -> List[SaleTic
     sales_economic: int = route.get_randon_sale_economic()
     sales_premiun: int = route.get_randon_sale_premiun()
 
-print(create_list_route())
+
+create_list_route()
+
 create_list_airplane()
