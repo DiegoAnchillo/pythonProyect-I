@@ -5,3 +5,5 @@ NSEAT_MAX_ECONOMIC:int  = 144
 IGV_PERCENT:float = 18
 
 CURRENCY_SYMBOL:str = "$ "
+PREMIUM_TYPE = 'premium'
+ECONOMIC_TYPE = 'economic'

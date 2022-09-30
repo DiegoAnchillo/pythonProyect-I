@@ -19,7 +19,7 @@ class Route(object):
         self.max_sales_premium: int = max_sales_premium
 
     def __repr__(self) -> str:
-        return self.name
+        return f"{self.name}-{self.get_randon_sale_economic()}-{self.get_randon_sale_premiun()}"
 
     def get_randon_sale_economic(self) -> int:
         return random.randint(self.min_sales_economic, self.max_sales_economic)

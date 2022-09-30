@@ -5,6 +5,7 @@ from typing import List, Dict
 from model.Airplane import Airplane
 from model.Route import Route
 from model.SaleTicket import SaleTicket
+from model.SaleTicketDetail import SaleTicketDetail
 
 def create_list_route() -> List[Route]:
 
@@ -99,14 +100,12 @@ def create_list_route() -> List[Route]:
         }
     ]
 
-    print(data_routes)
-
     routes: List[Route] = []
 
     for key, route in enumerate(data_routes):
         obj_route = Route(str(route['code']), str(route['name']), float(route['base_price']), int(route['economic']),
                           int(route['premium']), int(route['min_sales_economic']), int(route['max_sales_economic']),
-                          int(route['min_sale_premium']), int(route['max_sale_premium']))
+                          int(route['min_sales_premium']), int(route['max_sales_premium']))
         routes.append(obj_route)
     return routes
 
@@ -133,8 +132,6 @@ def create_list_airplane() -> List[Airplane]:
         }
     ]
 
-    print(data_plane)
-
     airplanes: List[Airplane] = []
 
     for key, airplane in enumerate(data_plane):
@@ -151,5 +148,5 @@ def create_sales_ticket(route: Route, airplanes: List[Airplane]) -> List[SaleTic
     sales_economic: int = route.get_randon_sale_economic()
     sales_premiun: int = route.get_randon_sale_premiun()
 
-create_list_route()
+print(create_list_route())
 create_list_airplane()
