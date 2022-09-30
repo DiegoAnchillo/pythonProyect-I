@@ -203,14 +203,20 @@ def main():
     print("\n")
     
     t_total_sales: int = 0
+    t_economic_sales:float = 0
 
     for key, route in enumerate(routes):
         # creamos la lista de objetos SaleTicket (tickets de venta)
         list_sales_tickets: List[SaleTicket] = create_sales_tickets(route)
 
-        # Total de tickets de ventas
+        # Total de tickets de venta
         total_sales = len(list_sales_tickets)
         t_total_sales += total_sales
+        
+        # Total de ingresos por Boletos Economicos
+        economic_sales:float = round(
+            sum([ticket.total for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Economic"]), 2)
+        t_economic_sales += economic_sales
 
         # Calcular la suma total de ventas
         rep_total_sale = round(
@@ -238,6 +244,9 @@ def main():
         print(f"Ventas: {total_sales}")
         print(
             f"Total de Ventas: {utils.get_currency_format(CURRENCY_SYMBOL,rep_total_sale)}")
+        
+        print(
+            f"Total de Ventas Boletos economico: {utils.get_currency_format(CURRENCY_SYMBOL,economic_sales)}")
 
         print(
             f"Total de IGV: {utils.get_currency_format(CURRENCY_SYMBOL, rep_total_igv)}")
@@ -249,10 +258,15 @@ def main():
             f"Ticket de Venta más alta: {utils.get_currency_format(CURRENCY_SYMBOL, sorted_tickets[-1].total)}")
         print(
             f"Total de Tickets mayor al promedio de venta: {rep_tickets_higher_than}")
+        print("\n")
+        print("-"*30)
+        print("\n")
 
         
         
     print(f"Total de pasajes vendidos : {t_total_sales}")
+    print(
+          f"Total de Boletos Economicos: {utils.get_currency_format(CURRENCY_SYMBOL, t_economic_sales)}")
     
     print("\n")
     print("-"*30)
