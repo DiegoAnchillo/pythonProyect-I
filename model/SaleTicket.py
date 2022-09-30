@@ -1,23 +1,23 @@
-
 from config import IGV_PERCENT
 from model.Route import Route
-from model.SaleTicketDetail import SaleTicketDetail
 from typing import List
-
 
 class SaleTicket(object):
     """
-    Clase Ticket de venta
+    Clase Boleto de viaje
     """
-    def __init__(self, number: str, route: Route, list_detail: List[SaleTicketDetail]):
+    def __init__(self, number: str, route: Route, typeTicket: str, subtotal:float):
+        # Numero de ticket
         self.number: str = number
+        # Ruta de viaje
         self.route: Route = route
-        self.list_detail: List[SaleTicketDetail] = list_detail
-
-    def __repr__(self) -> str:
-        return self.number
+        # Tipo de Boleto
+        self.typeTicket: str = typeTicket
+        # Subtotal del costo del Boleto
+        self.subtotal: float = subtotal
+        self.calculate_amounts()
     
     def calculate_amounts(self) -> None:
-        self.subtotal = sum([detail.total for key, detail in enumerate(self.list_detail)])
-        self.igv: float = self.subtotal * IGV_PERCENT/100
+        # Calcula los montos que dependen del subtotal del Boleto
+        self.igv: float = self.subtotal*IGV_PERCENT/100
         self.total: float = self.subtotal + self.igv
