@@ -8,7 +8,6 @@ from model.SaleTicket import SaleTicket
 from config import CURRENCY_SYMBOL
 import utils
 
-
 def create_list_routes() -> List[Route]:
     # Función que crea y devuelve una lista de objetos Route
     data_routes: List[Dict[str, str | float | int]] = [
@@ -102,8 +101,6 @@ def create_list_routes() -> List[Route]:
         }
     ]
 
-    # print(data_routes)
-
     routes: List[Route] = []
 
     for key, route in enumerate(data_routes):
@@ -112,8 +109,6 @@ def create_list_routes() -> List[Route]:
                           int(route['min_sales_premium']), int(route['max_sales_premium']))
         routes.append(obj_route)
     return routes
-
-
 
 def create_list_airplanes() -> List[Airplane]:
     # Función que crea y devuelve una lista de objetos Airplane
@@ -144,8 +139,6 @@ def create_list_airplanes() -> List[Airplane]:
         }
     ]
 
-    # print(data_plane)
-
     airplanes: List[Airplane] = []
 
     for key, airplane in enumerate(data_plane):
@@ -153,7 +146,6 @@ def create_list_airplanes() -> List[Airplane]:
                                 str(airplane['going']), str(['comeback']))
         airplanes.append(obj_airplane)
     return airplanes
-
 
 def create_sales_tickets(route: Route) -> List[SaleTicket]:
 
@@ -165,9 +157,6 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
     sales_premiun: int = route.get_randon_sale_premiun()
     
     for i in range(sales_economic):
-        # list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
-        # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
-        # list_tickets.append(sale_ticket)
         correlative: str = str(i+1).zfill(5)
         ticket_number: str = f"{route.code}{correlative}"
         subtotal: float = round(route.base_price + route.economic, 2)
@@ -179,9 +168,6 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
         list_tickets.append(sale_ticket)
         
     for i in range(sales_premiun):
-        # list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
-        # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
-        # list_tickets.append(sale_ticket)
         correlative: str = str(i+1).zfill(5)
         ticket_number: str = f"{route.code}{correlative}"
         subtotal: float = round(route.base_price + route.premium, 2)
@@ -193,7 +179,6 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
         list_tickets.append(sale_ticket)    
         
     return list_tickets
-
 
 def main():
     # Función principal del módulo app.py

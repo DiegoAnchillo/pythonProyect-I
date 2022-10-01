@@ -1,12 +1,14 @@
 import random
 
+from model.Airplane import Airplane
 
 class Route(object):
     
     def __init__(self, code: str, name: str, base_price: float,
                  economic: int, premium: int,
                  min_sales_economic: int, max_sales_economic: int,
-                 min_sales_premium: int, max_sales_premium):
+                 min_sales_premium: int, max_sales_premium: int,
+                 airplane: Airplane):
         # Codigo de la ruta
         self.code: str = code
         # Nombre de la ruta
@@ -25,6 +27,8 @@ class Route(object):
         self.min_sales_premium: int = min_sales_premium
         # Ventas maximas de Boleto premium
         self.max_sales_premium: int = max_sales_premium
+        # Avion asignado a la ruta
+        self.airplane: Airplane = airplane
 
     def __repr__(self) -> str:
         # Método especial para representar el objeto de una clase como string.
