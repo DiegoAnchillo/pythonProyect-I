@@ -293,13 +293,15 @@ def main():
         f"Valor Promedio Pasaje Premium: "
         f"{utils.get_currency_format(CURRENCY_SYMBOL, round(premium_sales / n_premium, 2))}")
     print(
-        f"Vuelo Pasajeros más alto: {sorted_reports_seat[-1].n_seat_sales}")
+        f"Vuelo Pasajeros más alto: {sorted_reports_seat[-1].code_route} -"
+        f"{sorted_reports_seat[-1].n_seat_sales}")
     print(
-        f"Vuelo Pasajeros más bajo: {sorted_reports_seat[0].n_seat_sales}")
+        f"Vuelo Pasajeros más bajo: {sorted_reports_seat[0].code_route} -"
+        f"{sorted_reports_seat[0].n_seat_sales}")
     print(
         f"Tres primeros vuelos con mayores ingresos: \n "
-        f"{sorted_reports_sale[0].code_route} \n "
-        f"{sorted_reports_sale[1].code_route} \n {sorted_reports_sale[2].code_route}")
+        f"{sorted_reports_sale[-1].code_route} \n "
+        f"{sorted_reports_sale[-2].code_route} \n {sorted_reports_sale[-3].code_route}")
     
     print(
         f"Avion Pasajeros más bajo: {sorted_reports_seat[-1].name_airplane}")
