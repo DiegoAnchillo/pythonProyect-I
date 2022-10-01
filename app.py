@@ -238,36 +238,34 @@ def main():
         
         list_report.append(obj_report)
         
-    """ ticket_avg_economic: float = round(economic_sales / n_economic, 2)
-        t_n_economic += n_economic
-        
-        # Calculando el valor del ticket promedio de un Boleto Premium.
-        n_premium: int = len([k for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Premium"])
-        ticket_avg_premium: float = round(premiun_sales / n_premium, 2)
-        t_n_premium += n_premium
-
-        # Calcular la suma total de ventas
-        rep_total_sale = round(
-            sum([ticket.total for k, ticket in enumerate(list_sales_tickets)]), 2)
-    """
+    # Total de tickets de venta
     seat_sales: int = sum(
         [report.n_seat_sales for k, report in enumerate(list_report)])
     
+    # Total de ingresos por Boletos Economicos
     economic_sales: float = sum(
         [report.t_economic_sales for k, report in enumerate(list_report)])
     
+    # Total de ingresos por Boletos Premium
     premium_sales: float = sum(
         [report.t_premium_sales for k, report in enumerate(list_report)])
     
+    # Obteniendo numero Boletos Economicos.
     n_economic: int = sum(
         [report.n_seat_economic for k, report in enumerate(list_report)])
     
+    # Obteniendo numero Boletos Premium.
     n_premium: int = sum(
         [report.n_seat_premium for k, report in enumerate(list_report)])
     
+    # Calculando la suma total de IGV cobrado
     total_igv: float = sum(
         [report.t_igv_sales for k, report in enumerate(list_report)])
-        
+    
+    # Ordenemos lista de Report (de menor a mayor segun cantidad de pasajeros)
+    sorted_reports: List[Report] = sorted(
+        list_report, key=lambda x: x.n_seat_sales)
+    
     print("\n")
     print("*"*30)
     print("REPORTE DE VENTAS DEL DIA")
@@ -275,15 +273,20 @@ def main():
     print("\n")
     print(f"Total de pasajes vendidos : {seat_sales}")
     print(
-        f"Total de Boletos Economicos: {utils.get_currency_format(CURRENCY_SYMBOL, economic_sales)}")
+        f"Total Ingresos por venta Boletos Economicos: {utils.get_currency_format(CURRENCY_SYMBOL, economic_sales)}")
     print(
-        f"Total de Boletos Premium: {utils.get_currency_format(CURRENCY_SYMBOL, premium_sales)}")
+        f"Total Ingresos por venta Boletos Premium: {utils.get_currency_format(CURRENCY_SYMBOL, premium_sales)}")
     print(
         f"Total de IGV: {utils.get_currency_format(CURRENCY_SYMBOL, total_igv)}")
     print(
         f"Valor Promedio Pasaje Economico: {utils.get_currency_format(CURRENCY_SYMBOL, round(economic_sales / n_economic, 2))}")
     print(
         f"Valor Promedio Pasaje Premium: {utils.get_currency_format(CURRENCY_SYMBOL, round(premium_sales / n_economic, 2))}")
+    print(
+        f"Vuelo Pasajeros más alto: {sorted_reports[-1].n_seat_sales}")
+    print(
+        f"Vuelo Pasajeros más bajo: {sorted_reports[0].n_seat_sales}")
+    
     print("\n")
     print("-"*30)
     print("\n")
