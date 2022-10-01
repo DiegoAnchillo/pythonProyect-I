@@ -5,7 +5,7 @@ class Airplane(object):
         # Nombre del avion
         self.name: str = name
         # Numero asientos del avion
-        self.n_seat:int = n_seat
+        self.n_seat: int = n_seat
         # Horario de salida
         self.going: str = going
         # Horario de regreso

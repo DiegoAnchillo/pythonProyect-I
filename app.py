@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Counter, List, Dict
+from typing import List, Dict
 
 from model.Airplane import Airplane
 from model.Report import Report
@@ -8,7 +8,7 @@ from model.Route import Route
 from model.SaleTicket import SaleTicket
 from config import CURRENCY_SYMBOL
 import utils
-import math
+
 
 def create_list_airplanes() -> List[Airplane]:
     # Función que crea y devuelve una lista de objetos Airplane
@@ -46,6 +46,7 @@ def create_list_airplanes() -> List[Airplane]:
                                 str(airplane['going']), str(['comeback']))
         airplanes.append(obj_airplane)
     return airplanes
+
 
 def create_list_routes() -> List[Route]:
     # Crear la lista de objetos Airplane
@@ -157,13 +158,15 @@ def create_list_routes() -> List[Route]:
         obj_route = Route(str(route['code']), str(route['name']), float(route['base_price']), int(route['economic']),
                           int(route['premium']), int(route['min_sales_economic']), int(route['max_sales_economic']),
                           int(route['min_sales_premium']), int(route['max_sales_premium']), 
-                          Airplane(route['plane'].name, route['plane'].n_seat, route['plane'].going, route['plane'].comeback))
+                          Airplane(route['plane'].name, route['plane'].n_seat,
+                                   route['plane'].going, route['plane'].comeback))
         routes.append(obj_route)
     return routes
 
+
 def create_sales_tickets(route: Route) -> List[SaleTicket]:
 
-    list_tickets:List[SaleTicket] =[]
+    list_tickets: List[SaleTicket] = []
     
     # Obtenemos la cantidad de ventas de asiento economico de manera aleatoria
     sales_economic: int = route.get_randon_sale_economic()
@@ -194,6 +197,7 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
         
     return list_tickets
 
+
 def main():
     # Función principal del módulo app.py
 
@@ -217,7 +221,7 @@ def main():
         n_premium: int = len([k for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Premium"])
         
         # Total de ingresos por Boletos Economicos
-        economic_sales:float = round(
+        economic_sales: float = round(
             sum([ticket.total for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Economic"]), 2)
         
         # Total de ingresos por Boletos Premium
@@ -233,8 +237,8 @@ def main():
             sum([ticket.total for k, ticket in enumerate(list_sales_tickets)]), 2)
         
         # Guardando nuestro objeto Report
-        obj_report = Report(route.code, seat_sales, n_economic, n_premium, economic_sales, premiun_sales,
-                           total_igv, total_sale, route.airplane.name)
+        obj_report = Report(route.code, seat_sales, n_economic, n_premium,
+                            economic_sales, premiun_sales, total_igv, total_sale, route.airplane.name)
         
         list_report.append(obj_report)
         
@@ -283,15 +287,19 @@ def main():
     print(
         f"Total de IGV: {utils.get_currency_format(CURRENCY_SYMBOL, total_igv)}")
     print(
-        f"Valor Promedio Pasaje Economico: {utils.get_currency_format(CURRENCY_SYMBOL, round(economic_sales / n_economic, 2))}")
+        f"Valor Promedio Pasaje Economico: "
+        f"{utils.get_currency_format(CURRENCY_SYMBOL, round(economic_sales / n_economic, 2))}")
     print(
-        f"Valor Promedio Pasaje Premium: {utils.get_currency_format(CURRENCY_SYMBOL, round(premium_sales / n_economic, 2))}")
+        f"Valor Promedio Pasaje Premium: "
+        f"{utils.get_currency_format(CURRENCY_SYMBOL, round(premium_sales / n_premium, 2))}")
     print(
         f"Vuelo Pasajeros más alto: {sorted_reports_seat[-1].n_seat_sales}")
     print(
         f"Vuelo Pasajeros más bajo: {sorted_reports_seat[0].n_seat_sales}")
     print(
-        f"Tres primeros vuelos con mayores ingresos: \n {sorted_reports_sale[0].code_route} \n {sorted_reports_sale[1].code_route} \n {sorted_reports_sale[2].code_route}" )
+        f"Tres primeros vuelos con mayores ingresos: \n "
+        f"{sorted_reports_sale[0].code_route} \n "
+        f"{sorted_reports_sale[1].code_route} \n {sorted_reports_sale[2].code_route}")
     
     print(
         f"Avion Pasajeros más bajo: {sorted_reports_seat[-1].name_airplane}")

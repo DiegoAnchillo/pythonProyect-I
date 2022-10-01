@@ -2,6 +2,7 @@ import random
 
 from model.Airplane import Airplane
 
+
 class Route(object):
     
     def __init__(self, code: str, name: str, base_price: float,
