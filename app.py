@@ -208,7 +208,7 @@ def main():
 
         # Total de tickets de venta
         seat_sales = len(list_sales_tickets)
-        
+
         # Obteniendo numero Boletos Economicos.
         n_economic: int = len(
             [k for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Economic"])
@@ -263,8 +263,12 @@ def main():
         [report.t_igv_sales for k, report in enumerate(list_report)])
     
     # Ordenemos lista de Report (de menor a mayor segun cantidad de pasajeros)
-    sorted_reports: List[Report] = sorted(
+    sorted_reports_seat: List[Report] = sorted(
         list_report, key=lambda x: x.n_seat_sales)
+    
+    # Ordenemos lista de Report (de menor a mayor segun cantidad de pasajeros)
+    sorted_reports_sale: List[Report] = sorted(
+        list_report, key=lambda x: x.t_total_sales)
     
     print("\n")
     print("*"*30)
@@ -283,10 +287,16 @@ def main():
     print(
         f"Valor Promedio Pasaje Premium: {utils.get_currency_format(CURRENCY_SYMBOL, round(premium_sales / n_economic, 2))}")
     print(
-        f"Vuelo Pasajeros más alto: {sorted_reports[-1].n_seat_sales}")
+        f"Vuelo Pasajeros más alto: {sorted_reports_seat[-1].n_seat_sales}")
     print(
-        f"Vuelo Pasajeros más bajo: {sorted_reports[0].n_seat_sales}")
+        f"Vuelo Pasajeros más bajo: {sorted_reports_seat[0].n_seat_sales}")
+    print(
+        f"Tres primeros vuelos con mayores ingresos: \n {sorted_reports_sale[0].code_route} \n {sorted_reports_sale[1].code_route} \n {sorted_reports_sale[2].code_route}" )
     
+    print(
+        f"Avion Pasajeros más bajo: {sorted_reports_seat[-1].name_airplane}")
+    print(
+        f"Avion Pasajeros más alto: {sorted_reports_seat[0].name_airplane}")
     print("\n")
     print("-"*30)
     print("\n")

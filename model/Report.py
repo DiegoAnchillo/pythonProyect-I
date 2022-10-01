@@ -10,7 +10,7 @@ class Report(object):
                  t_total_sales: float,
                  name_airplane: str):
         # Codigo de la ruta
-        self.code_ropute: str = code_route
+        self.code_route: str = code_route
         # Numero asientos vendidos
         self.n_seat_sales: int = n_seat_sales
         # Numero asientos Economicos vendidos
