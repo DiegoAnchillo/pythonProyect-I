@@ -103,7 +103,7 @@ def create_list_routes() -> List[Route]:
         }
     ]
 
-    #print(data_routes)
+    # print(data_routes)
 
     routes: List[Route] = []
 
@@ -121,19 +121,27 @@ def create_list_airplanes() -> List[Airplane]:
     data_plane: List[Dict[str, str | int]] = [
         {
             "name": "A001",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "06:30 AM",
+            "comeback": "15:45 PM"
         },
         {
             "name": "A002",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "07:25 AM",
+            "comeback": "16:25 PM"
         },
         {
             "name": "A003",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "08:10 AM",
+            "comeback": "17:15 PM"
         },
         {
             "name": "A004",
-            "n_seat": 168
+            "n_seat": 168,
+            "going": "08:50 AM",
+            "comeback": "17:50 PM"
         }
     ]
 
