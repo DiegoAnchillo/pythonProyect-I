@@ -270,7 +270,7 @@ def main():
     sorted_reports_seat: List[Report] = sorted(
         list_report, key=lambda x: x.n_seat_sales)
     
-    # Ordenemos lista de Report (de menor a mayor segun cantidad de pasajeros)
+    # Ordenemos lista de Report (de menor a mayor segun cantidad de ingresos)
     sorted_reports_sale: List[Report] = sorted(
         list_report, key=lambda x: x.t_total_sales)
     
