@@ -7,8 +7,7 @@ from model.Route import Route
 from model.SaleTicket import SaleTicket
 from config import CURRENCY_SYMBOL
 import utils
-import random
-import math
+
 
 def create_list_routes() -> List[Route]:
     # Función que crea y devuelve una lista de objetos Route
@@ -145,18 +144,20 @@ def create_list_airplanes() -> List[Airplane]:
         }
     ]
 
-    #print(data_plane)
+    # print(data_plane)
 
     airplanes: List[Airplane] = []
 
     for key, airplane in enumerate(data_plane):
-        obj_airplane = Airplane(str(airplane['name']), int(airplane['n_seat']))
+        obj_airplane = Airplane(str(airplane['name']), int(airplane['n_seat']),
+                                str(airplane['going']), str(['comeback']))
         airplanes.append(obj_airplane)
     return airplanes
 
+
 def create_sales_tickets(route: Route) -> List[SaleTicket]:
 
-    list_tickets:List[SaleTicket] =[]
+    list_tickets: List[SaleTicket] = []
     
     # Obtenemos la cantidad de ventas de asiento economico de manera aleatoria
     sales_economic: int = route.get_randon_sale_economic()
@@ -164,10 +165,9 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
     sales_premiun: int = route.get_randon_sale_premiun()
     
     for i in range(sales_economic):
-        #list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
-
-       # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
-       # list_tickets.append(sale_ticket)
+        # list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
+        # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
+        # list_tickets.append(sale_ticket)
         correlative: str = str(i+1).zfill(5)
         ticket_number: str = f"{route.code}{correlative}"
         subtotal: float = round(route.base_price + route.economic, 2)
@@ -179,10 +179,9 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
         list_tickets.append(sale_ticket)
         
     for i in range(sales_premiun):
-        #list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
-
-       # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
-       # list_tickets.append(sale_ticket)
+        # list_tickets: List[SaleTicketDetail] = create_detail_sale_ticket(airplane, route)
+        # sale_ticket: SaleTicket = SaleTicket(airplane, list_tickets)
+        # list_tickets.append(sale_ticket)
         correlative: str = str(i+1).zfill(5)
         ticket_number: str = f"{route.code}{correlative}"
         subtotal: float = round(route.base_price + route.premium, 2)
@@ -194,6 +193,7 @@ def create_sales_tickets(route: Route) -> List[SaleTicket]:
         list_tickets.append(sale_ticket)    
         
     return list_tickets
+
 
 def main():
     # Función principal del módulo app.py
@@ -211,7 +211,8 @@ def main():
     print("\n")
     
     t_total_sales: int = 0
-    t_economic_sales:float = 0
+    t_economic_sales: float = 0
+    t_premium_sales: float = 0
 
     for key, route in enumerate(routes):
         # creamos la lista de objetos SaleTicket (tickets de venta)
@@ -222,9 +223,14 @@ def main():
         t_total_sales += total_sales
         
         # Total de ingresos por Boletos Economicos
-        economic_sales:float = round(
+        economic_sales: float = round(
             sum([ticket.total for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Economic"]), 2)
         t_economic_sales += economic_sales
+
+        # Total de ingresos por Boletos Economicos
+        premiun_sales: float = round(
+            sum([ticket.total for k, ticket in enumerate(list_sales_tickets) if ticket.typeTicket == "Premium"]), 2)
+        t_premium_sales += premiun_sales
 
         # Calcular la suma total de ventas
         rep_total_sale = round(
@@ -257,6 +263,9 @@ def main():
             f"Total de Ventas Boletos economico: {utils.get_currency_format(CURRENCY_SYMBOL,economic_sales)}")
 
         print(
+            f"Total de Ventas Boletos premium: {utils.get_currency_format(CURRENCY_SYMBOL, premiun_sales)}")
+
+        print(
             f"Total de IGV: {utils.get_currency_format(CURRENCY_SYMBOL, rep_total_igv)}")
         print(
             f"Ticket Promedio: {utils.get_currency_format(CURRENCY_SYMBOL, ticket_avg)}")
@@ -275,6 +284,8 @@ def main():
     print(f"Total de pasajes vendidos : {t_total_sales}")
     print(
           f"Total de Boletos Economicos: {utils.get_currency_format(CURRENCY_SYMBOL, t_economic_sales)}")
+    print(
+        f"Total de Boletos Premium: {utils.get_currency_format(CURRENCY_SYMBOL, t_premium_sales)}")
     
     print("\n")
     print("-"*30)

@@ -1,5 +1,6 @@
 import random
 
+
 class Route(object):
     
     def __init__(self, code: str, name: str, base_price: float,
